@@ -16,6 +16,9 @@
 
 #pragma once
 
+#define IGNORE_MOD_TAP_INTERRUPT
+#define PERMISSIVE_HOLD
+
 #ifdef OLED_DRIVER_ENABLE
   #define OLED_DISPLAY_128X64
 #endif

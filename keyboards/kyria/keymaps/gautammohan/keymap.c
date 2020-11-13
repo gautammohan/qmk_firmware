@@ -18,6 +18,7 @@
 enum layers {
     _QWERTY = 0,
     _NUMSYMB,
+    _ARRCTRL,
     _ADJUST
 };
 
@@ -26,11 +27,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Base Layer: QWERTY
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * |RAIS/ESC|   Q  |   W  |   E  |   R  |   T  |                              |   Y  |   U  |   I  |   O  |   P  |  | \   |
+ * |        |   Q  |   W  |   E  |   R  |   T  |                              |   Y  |   U  |   I  |   O  |   P  |  | \   |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |Ctrl/BS |   A  |   S  |  D   |   F  |   G  |                              |   H  |   J  |   K  |   L  | ;  : |  ' "   |
+ * |ArrCtrl |   A  |   S  |  D   |   F  |   G  |                              |   H  |   J  |   K  |   L  | ;  : |  ' "   |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * | LShift |   Z  |   X  |   C  |   V  |   B  |      |      |  |      |      |   N  |   M  | ,  < | . >  | /  ? |  - _   |
+ * |        |   Z  |   X  |   C  |   V  |   B  |      |      |  |      |      |   N  |   M  | ,  < | . >  | /  ? |  - _   |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
  *                        |      |      | Tab  |Bckspc| Esc  |  | Enter| Space| Del  |      |      |
  *                        |      |      | Shift|Ctrl  | GUI  |  |CtlAlt| Alt  | Symb |      |      |
@@ -38,12 +39,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
     [_QWERTY] = LAYOUT(
       XXXXXXX,       KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,                                         KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,   XXXXXXX,
-      XXXXXXX,       KC_A,   KC_S,   KC_D,   KC_F,   KC_G,                                         KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
+      MO(_ARRCTRL),  KC_A,   KC_S,   KC_D,   KC_F,   KC_G,                                         KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
       XXXXXXX,       KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,   XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, XXXXXXX,
                 XXXXXXX, XXXXXXX, LSFT_T(KC_TAB), LCTL_T(KC_BSPC), LGUI_T(KC_ESC), LCA_T(KC_ENT), RALT_T(KC_SPC), LT(_NUMSYMB, KC_DEL), MO(_ADJUST), XXXXXXX
     ),
 /*
- * Blank layer
+ * Symbols & Numpad layer
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
  * |        |  !   |  &   |  |   |  {   |  }   |                              |   +  |  *   |  7   |   8  |  9   |   %    |
@@ -61,6 +62,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       XXXXXXX, KC_CIRC, KC_TILD,  KC_DLR, KC_LPRN, KC_RPRN,                                      KC_GRV, KC_MINS, KC_4, KC_5, KC_6, KC_DOT,
       XXXXXXX, KC_BSLS, KC_UNDS, KC_HASH, KC_LBRC, KC_RBRC, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_AT, KC_EQL,  KC_1, KC_2,  KC_3, KC_0,
                XXXXXXX, XXXXXXX, _______, _______, _______, _______, _______, _______,  XXXXXXX, XXXXXXX
+    ),
+
+/*
+ * Arrow keys + Other Controls layer
+ *
+ * ,-------------------------------------------.                              ,-------------------------------------------.
+ * |        |      |      |      |      |      |                              |bri_up|      |  up  |      |      |        |
+ * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
+ * |  NOOP  |      |      |      |      |      |                              |bri_dn| right| down |  left|      |        |
+ * |--------+------+------+------+------+------+-------------.  ,-------------+ ------+------+------+------+------+--------|
+ * |        |      |      |      |      |      |      |      |  |      |      |vol_dn|vol_up| mplay| mnext| mprev|        |
+ * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
+ *                        |      |      |      |      |      |  |      |      |      |      |      |
+ *                        |      |      |      |      |      |  |      |      |      |      |      |
+ *                        `----------------------------------'  `----------------------------------'
+ */
+    [_ARRCTRL] = LAYOUT(
+      _______, _______, _______, _______, _______, _______,                                     KC_BRIU, _______, KC_UP, _______, _______, _______,
+      XXXXXXX, _______, _______, _______, _______, _______,                                     KC_BRID, KC_LEFT, KC_DOWN, KC_RGHT, _______, _______,
+      _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_VOLD, KC_VOLU, KC_MPLY, KC_MPRV, KC_MNXT, _______,
+                                 _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
     ),
 
 /*
@@ -83,6 +105,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _______, _______, RGB_SAD, RGB_HUD, RGB_VAD, RGB_RMOD,_______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
     ),
+
 // /*
 //  * Layer template
 //  *
@@ -153,6 +176,9 @@ static void render_status(void) {
             break;
         case _ADJUST:
             oled_write_P(PSTR("Adjust\n"), false);
+            break;
+        case _ARRCTRL:
+            oled_write_P(PSTR("Arrows/Ctrl\n"), false);
             break;
         default:
             oled_write_P(PSTR("Undefined\n"), false);

@@ -19,7 +19,7 @@ enum layers {
     _QWERTY = 0,
     _NUMSYMB,
     _ARRCTRL,
-    _ADJUST
+     _RGBFN
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -27,11 +27,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Base Layer: QWERTY
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * |        |   Q  |   W  |   E  |   R  |   T  |                              |   Y  |   U  |   I  |   O  |   P  |  | \   |
+ * |        |   Q  |   W  |   E  |   R  |   T  |                              |   Y  |   U  |   I  |   O  |   P  |        |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
  * |ArrCtrl |   A  |   S  |  D   |   F  |   G  |                              |   H  |   J  |   K  |   L  | ;  : |  ' "   |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * |        |   Z  |   X  |   C  |   V  |   B  |      |      |  |      |      |   N  |   M  | ,  < | . >  | /  ? |  - _   |
+ * |        |   Z  |   X  |   C  |   V  |   B  |      |      |  |      |      |   N  |   M  | ,  < | . >  | /  ? |        |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
  *                        |      |      | Tab  |Bckspc| Esc  |  | Enter| Space| Del  |      |      |
  *                        |      |      | Shift|Ctrl  | GUI  |  |CtlAlt| Alt  | Symb |      |      |
@@ -41,26 +41,26 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       XXXXXXX,       KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,                                         KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,   XXXXXXX,
       MO(_ARRCTRL),  KC_A,   KC_S,   KC_D,   KC_F,   KC_G,                                         KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
       XXXXXXX,       KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,   XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, XXXXXXX,
-                XXXXXXX, XXXXXXX, LSFT_T(KC_TAB), LCTL_T(KC_BSPC), LGUI_T(KC_ESC), LCA_T(KC_ENT), RALT_T(KC_SPC), LT(_NUMSYMB, KC_DEL), MO(_ADJUST), XXXXXXX
+                XXXXXXX, XXXXXXX, LSFT_T(KC_TAB), LCTL_T(KC_BSPC), LGUI_T(KC_ESC), LCA_T(KC_ENT), RALT_T(KC_SPC), LT(_NUMSYMB, KC_DEL), MO(_RGBFN), XXXXXXX
     ),
 /*
  * Symbols & Numpad layer
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * |        |  !   |  &   |  |   |  {   |  }   |                              |   +  |  *   |  7   |   8  |  9   |   %    |
+ * |        |  !   |  &   |  |   |  {   |  }   |                              |  .   |  7   |   8  |  9   |   +  |   %    |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |        |  ^   |  ~   |  $   |  (   |  )   |                              |   `  |  -   |  4   |   5  |  6   |   .    |
+ * |   -    |  ^   |  ~   |  $   |  (   |  )   |                              |  *   |  4   |   5  |  6   |   =  |   `    |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * |        |  \   |  _   |  #   |  [   |  ]   |      |      |  |      |      |   @  |  =   |  1   |   2  |  3   |   0   |
- * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
+ * |        |  \   |  _   |  #   |  [   |  ]   |      |      |  |      |      |  @   |  1   |   2  |  3   |   0  |        |
+ * `----------------------+------+------+------+------+------|  |------+------+------+------+--------------------+--------'
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
     [_NUMSYMB] = LAYOUT(
-      XXXXXXX, KC_EXLM, KC_AMPR,   KC_PIPE, KC_LCBR, KC_RCBR,                                     KC_PLUS, KC_ASTR, KC_7, KC_8, KC_9, KC_PERC,
-      XXXXXXX, KC_CIRC, KC_TILD,  KC_DLR, KC_LPRN, KC_RPRN,                                      KC_GRV, KC_MINS, KC_4, KC_5, KC_6, KC_DOT,
-      XXXXXXX, KC_BSLS, KC_UNDS, KC_HASH, KC_LBRC, KC_RBRC, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_AT, KC_EQL,  KC_1, KC_2,  KC_3, KC_0,
+      XXXXXXX, KC_EXLM, KC_AMPR,   KC_PIPE, KC_LCBR, KC_RCBR,                                     KC_DOT, KC_7, KC_8, KC_9, KC_PLUS, KC_PERC,
+      KC_MINS, KC_CIRC, KC_TILD,  KC_DLR, KC_LPRN, KC_RPRN,                                      KC_ASTR, KC_4, KC_5, KC_6, KC_EQL, KC_GRV,
+      XXXXXXX, KC_BSLS, KC_UNDS, KC_HASH, KC_LBRC, KC_RBRC, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_AT,  KC_1, KC_2,  KC_3, KC_0, XXXXXXX,
                XXXXXXX, XXXXXXX, _______, _______, _______, _______, _______, _______,  XXXXXXX, XXXXXXX
     ),
 
@@ -99,7 +99,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
-    [_ADJUST] = LAYOUT(
+    [ _RGBFN] = LAYOUT(
       _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                                       KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  _______,
       _______, RGB_TOG, RGB_SAI, RGB_HUI, RGB_VAI, RGB_MOD,                                     _______, _______, _______, KC_F11,  KC_F12,  _______,
       _______, _______, RGB_SAD, RGB_HUD, RGB_VAD, RGB_RMOD,_______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
@@ -129,8 +129,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 /* layer_state_t layer_state_set_user(layer_state_t state) { */
-/*     return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST); */
+/*     return update_tri_layer_state(state, _LOWER, _RAISE,  _RGBFN); */
 /* } */
+
+bool get_ignore_mod_tap_interrupt(uint16_t keycode, keyrecord_t *record) {
+
+  switch (keycode) {
+  case LSFT_T(KC_TAB):
+    return false;
+  default:
+    return true;
+  }
+
+}
+
+bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
+
+  // For some reason if I just enable permissive hold via the macro it
+  // does not seem to have the same behavior, so I have to do this
+  // instead.
+  return true;
+
+}
 
 #ifdef OLED_DRIVER_ENABLE
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
@@ -174,8 +194,8 @@ static void render_status(void) {
         case _NUMSYMB:
             oled_write_P(PSTR("Symbols\n"), false);
             break;
-        case _ADJUST:
-            oled_write_P(PSTR("Adjust\n"), false);
+        case  _RGBFN:
+            oled_write_P(PSTR("RGB/Fn\n"), false);
             break;
         case _ARRCTRL:
             oled_write_P(PSTR("Arrows/Ctrl\n"), false);
